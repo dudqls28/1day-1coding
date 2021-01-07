@@ -3,56 +3,35 @@ package Programmer.Level1.SecretMap;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-
+//String binaryString = Integer.toBinaryString(i); //2진수
+//String octalString = Integer.toOctalString(i);   //8진수
+//String hexString = Integer.toHexString(i);      //16진수
 
 class Solution {
-    public int[] solution(int N, int[] stages) {
-        int[] answer = new int[N];
-        double[] tempArr = new double[N];
-        int arrLength = stages.length;
-        int idx = arrLength;
-        double tempD = 0;
-        int tempI = 0;
-        for (int i = 0; i < arrLength; i++) {
-            int stage = stages[i];
-            if (stage != N + 1)
-                answer[stage - 1] += 1;
-           
-        }
+    public String[] solution(int n, int[] arr1, int[] arr2) {
+        String[] answer = new String[n];
         
-        for (int i = 0; i < N; i++) {
-            int personNum = answer[i];
-            tempArr[i] = (double) personNum / idx;
-            idx -= personNum;
-            answer[i] = i + 1;
-        }
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 1; j < N - i; j++) {
-                if (tempArr[j - 1] < tempArr[j]) {
-                    tempD = tempArr[j - 1];
-                    tempArr[j - 1] = tempArr[j];
-                    tempArr[j] = tempD;
-
-                    tempI = answer[j - 1];
-                    answer[j - 1] = answer[j];
-                    answer[j] = tempI;
-                }
-            }
+        for( int i=0;i<n;i++){
+        	// Integer.parseInt 使用したか範囲超過 Long.ParseLongに代替
+        	// format 使用して0のせきお作った
+            answer[i]=String.format("%0"+n+"d", Long.parseLong(Integer.toBinaryString(arr1[i]|arr2[i])));
+            
+            answer[i]=answer[i].replace("1","#");
+            answer[i]=answer[i].replace("0"," ");
         }
         return answer;
-    }
 }
-
+}
 public class SecretMap{
 
 public static void main(String[] args) {
 	int n= 5;
-	int[] stages= {2, 1, 2, 6, 2, 4, 3, 3};
+	int[] arr1= {9, 20, 28, 18, 11};
+	int[] arr2= {30, 1, 21, 17, 28};
 	
 	Solution s = new Solution();
 	
-	int[] answer= s.solution(n, stages);
+	String[] answer= s.solution(n,arr1,arr2);
 	for(int i=0;i<answer.length;i++) {
 	System.out.print(answer[i]+",");
 	}
