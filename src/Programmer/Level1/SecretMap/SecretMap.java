@@ -3,9 +3,9 @@ package Programmer.Level1.SecretMap;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-//String binaryString = Integer.toBinaryString(i); //2진수
-//String octalString = Integer.toOctalString(i);   //8진수
-//String hexString = Integer.toHexString(i);      //16진수
+//String binaryString = Integer.toBinaryString(i); //2進数
+//String octalString = Integer.toOctalString(i);   //8進数
+//String hexString = Integer.toHexString(i);      //16進数
 
 class Solution {
     public String[] solution(int n, int[] arr1, int[] arr2) {
