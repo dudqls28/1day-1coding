@@ -1,4 +1,4 @@
-package Programmer.Level1.StringDescending;
+package Programmer.Level1.CaesarPassword;
 
 import java.util.*;
 
@@ -30,7 +30,7 @@ import java.util.*;
 	    }
 	}
 
-public class StringDescending{
+public class CaesarPassword{
 
 public static void main(String[] args) {
 	String str = "a B z";
