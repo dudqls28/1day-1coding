@@ -9,45 +9,30 @@ class Solution {
         char[] ch = dartResult.toCharArray();
         String[] arr = new String[3];
         int num=0;
-        
         for(int i = 0 ;i<dartResult.length();i++){
-            if(num==2){
-                    arr[num]=dartResult.substring(i,dartResult.length());
-                    break;
-                }
             for(int j=i+1;j<dartResult.length();j++){
-                if(num==1){
-                    if(ch[j]>='0'&&ch[j]<='9'){
-                        
-                        int count = j;
-                        arr[num]=dartResult.substring(i,count);
-                        i=j-1;
+                
+                if(ch[j]=='S'||ch[j]=='D'||ch[j]=='T'){
+                	if(num==2) {
+                		arr[num]=dartResult.substring(i,dartResult.length());
                         num++;
-                        break;
-                    }
-                    
-                }
-                if(ch[j]>='0'&&ch[j]<='9'&&j==1){
-                    if(ch[j+1]>='0'&&ch[j+1]<='9'){
-                        arr[num]=dartResult.substring(0,j+1);
-                    i=j;
-                    num++;
-                    break;
-                    }else{
-                        arr[num]=dartResult.substring(0,j+2);
+                		break;
+                	}
+                    if(j+1<dartResult.length()){
+                    if(ch[j+1]=='*'||ch[j+1]=='#'){
+                        arr[num]=dartResult.substring(i,j+2);
                     i=j+1;
                     num++;
                     break;
-                    }
-                    
-                }
-                if(ch[j]>='0'&&ch[j]<='9'){
-                    arr[num]=dartResult.substring(i,j);
-                    i=j-1;
+                    }else{
+                        arr[num]=dartResult.substring(i,j+1);
+                    i=j;
                     num++;
                     break;
-                }
-               
+                    }
+                    
+                }  
+            }
             }
         }
         
@@ -67,9 +52,7 @@ class Solution {
                         temp[i]+=Math.pow(10,2); 
                     }else{
                         temp[i]+=Math.pow((arr[i].charAt(j-1)-48),2); 
-                    }
-                    
-                    
+                    }  
                 }else if(arr[i].charAt(j)=='T'){
                     if(arr[i].charAt(j-1)=='0'&&j-1!=0){
                         temp[i]+=Math.pow(10,3); 
@@ -86,16 +69,11 @@ class Solution {
                 }else if(arr[i].charAt(j)=='#'){
                     temp[i]+=temp[i]*-2;
                 }
-                
-                
             }
         }
-        
         for(int i = 0 ; i<temp.length;i++){
             answer+=temp[i];
-        }
-        
-        
+        } 
         return answer;
     }
 }
@@ -103,8 +81,8 @@ class Solution {
 public class DartGame{
 	
 	public static void main(String[] args) {
-		String dart= "1S2D*3T";
-		//answer = 37;
+		String dart= "3T*10S10S";
+		//answer = 74;
 		
 		Solution s = new Solution();
 		
