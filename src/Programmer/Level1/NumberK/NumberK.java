@@ -1,28 +1,28 @@
 package Programmer.Level1.NumberK;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 
 class Solution {
 
 	public int[] solution(int[] array, int[][] commands) {
-        int[] answer = {};
-        answer = new int[commands.length];
-        int i,j,k;
-        HashSet<Integer> set=new HashSet<Integer>();
-
-        for(int x=0;x<commands.length;x++){
-        i=commands[x][0];
-        j=commands[x][1];
-        k=commands[x][2];
-        for(int q=i-1;q<j;){
-          set.add(array[q]);
-            q++;
+        int[] answer = new int[commands.length];
+        int arr_count = 0;
+        int count = 0;
+        for(int i=0; i<commands.length; i++) {
+            int[] arr = new int[(commands[i][1]-commands[i][0])+1];
+            for(int j=commands[i][0]-1; j<commands[i][1]; j++) {
+                arr[arr_count] = array[j];
+                arr_count++;
+            }
+            
+            Arrays.sort(arr);
+            answer[count] = arr[commands[i][2]-1];
+            count++;
+            arr_count = 0;
         }
-        System.out.println("");
-        ArrayList<Integer> list=new ArrayList<Integer>(set);
-        answer[x]=list.get(k-1);
-    }
         return answer;
 }
 }
@@ -32,7 +32,7 @@ public class NumberK{
 	public static void main(String[] args) {
 		int[] array= {1, 5, 2, 6, 3, 7, 4};
 		int[][] commands= {{2, 5, 3}, {4, 4, 1}, {1, 7, 3}};
-		
+		//answer = 5,6,3
 		Solution s = new Solution();
 		
 		int[] answer= s.solution(array, commands);
