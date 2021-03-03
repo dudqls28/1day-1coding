@@ -5,81 +5,44 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] answers) {
         
-        int[] Num1 = new int[answers.length];
-        int[] Num2 = new int[answers.length];
-        int[] Num3 = new int[answers.length];
-        int j =1;
-        int k =1;
-        int s =3;
+        int[] Num1 = {1,2,3,4,5};
+        int[] Num2 = {2,1,2,3,2,4,2,5};
+        int[] Num3 = {3,3,1,1,2,2,4,4,5,5};
+        
+        
+        int[] Num_count=new int[3];
         for(int i=0;i<answers.length;i++){
-            Num1[i]=j;
-            if(i%2==0){
-                Num2[i]=2;
-            }else{
-                Num2[i]=k;
-                if(k==1){
-                    k+=2;
-                }else{
-                    k++;
-                }
-            }
-            j++;
-            if(i%2==0){
-                Num3[i]=s;
-            }else{
-                
-                Num3[i]=s;
-                if(s==2){
-                    s+=2;
-                }else if(s==3){
-                    s-=2;
-                }else{
-                    s+=1;   
-                }
-            }
-            if(j==6){
-                j=1;
-            }
-            if(k==6){
-                k=1;
-            }
             
-        }
-        int[] Num_count={0,0,0};
-        for(int i=0;i<answers.length;i++){
-            if(Num1[i]==answers[i]){
-                Num_count[0]+=1;   
-            }else if(Num2[i]==answers[i]){
-                Num_count[1]+=1;   
-            }else if(Num3[i]==answers[i]){
-                Num_count[2]+=1;   
+            if(Num1[i%5]==answers[i]){
+                Num_count[0]++;   
+            }
+            if(Num2[i%8]==answers[i]){
+                Num_count[1]++;   
+            }
+            if(Num3[i%10]==answers[i]){
+                Num_count[2]++;   
             }
         }
         System.out.println(Num_count[0]);
         System.out.println(Num_count[1]);
         System.out.println(Num_count[2]);
-        int temp=0;
+        ArrayList<Integer> list = new ArrayList();
+        int max = Num_count[0];
         for(int i=0; i<Num_count.length;i++){
-            for(int q=i+1;q<Num_count.length;q++){
-                if(Num_count[i]>Num_count[q]){
-                   temp=i+1; 
-                }else{
-                    temp=q+1;
-                }
+            if(Num_count[i]>max){
+                max=Num_count[i];
             }
         }
-        
-        
-            if(Num_count[0]==Num_count[1]&&Num_count[1]==Num_count[2]){
-                temp=6;
-            }else if(Num_count[0]==Num_count[1]&&Num_count[1]>Num_count[2]){
-                temp=4;
-            }else if(Num_count[2]==Num_count[1]&&Num_count[1]>Num_count[0]){
-                temp=5;
+        for(int i=0; i<Num_count.length;i++){
+            if(max==Num_count[i]){
+                list.add(i+1);
             }
-        
-        System.out.println(temp);
-        int[] answer={1};
+        }
+        int[] answer = new int[list.size()];
+        for(int i=0; i<list.size(); i++) {
+            answer[i] = list.get(i);
+        }
+        Arrays.sort(answer);
         return answer;
     }
 }
